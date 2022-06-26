@@ -1,5 +1,4 @@
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
+import { Box, Typography } from '@mui/material'
 import bg from './images/pawel-czerwinski-Hu6kULsI5dM-unsplash.jpg'
 
 export default function Header() {
