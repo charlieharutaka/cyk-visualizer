@@ -13,13 +13,20 @@ export type NonterminalNode = {
 }
 export type ParseNode = TerminalNode | NonterminalNode
 
-export default function cyk(rules: Rule[], input: string[]) {
+/**
+ * The CYK algorithm
+ * @param {Array<Rule>} rules The set of grammar rules
+ * @param {Array<string>} input The input to parse
+ * @return {Array<Array<(Map<string, ParseNode> | undefined)>>} The parse matrix of maps where the keys
+ *  of the map represent the rule matched and the values are the parse nodes
+ */
+export default function cyk(rules: Rule[], input: string[]): (Map<string, ParseNode> | undefined)[][] {
   const n = input.length
   const r = rules.length
   const P = new Array<(Map<string, ParseNode> | undefined)[]>(n)
   for (let i = 0; i < n; i++) {
-    const P_i = new Array<Map<string, ParseNode> | undefined>(n - i).fill(undefined)
-    P[i] = P_i
+    const Pi = new Array<Map<string, ParseNode> | undefined>(n - i).fill(undefined)
+    P[i] = Pi
   }
 
   // Fill in terminal rules

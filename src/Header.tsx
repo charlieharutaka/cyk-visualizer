@@ -1,7 +1,13 @@
 import { Box, Typography } from '@mui/material'
+import React from 'react'
+
 import bg from './images/pawel-czerwinski-Hu6kULsI5dM-unsplash.jpg'
 
-export default function Header() {
+/**
+ * The header element
+ * @return {React.ReactElement}
+ */
+export default function Header(): React.ReactElement {
   return (
     <Box
       sx={{
