@@ -9,6 +9,7 @@ type NonterminalRuleRowProps = {
   onChangeHead: (head: string) => void
   onChangeLeft: (left: string) => void
   onChangeRight: (right: string) => void
+  onRemove: () => void
 }
 
 /**
@@ -23,6 +24,7 @@ export default function NonterminalRuleRow({
   onChangeHead,
   onChangeLeft,
   onChangeRight,
+  onRemove,
 }: NonterminalRuleRowProps): React.ReactElement {
   const [headValue, setHeadValue] = useState(() => head)
   const [leftValue, setLeftValue] = useState(() => left)
@@ -38,6 +40,19 @@ export default function NonterminalRuleRow({
 
   return (
     <>
+      <Grid
+        item
+        xs={1}
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <IconButton aria-label="delete" onClick={onRemove}>
+          <Remove />
+        </IconButton>
+      </Grid>
       <Grid item xs={4}>
         <TextField
           required
@@ -59,7 +74,7 @@ export default function NonterminalRuleRow({
       >
         <ArrowRightAlt color="action" />
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={4}>
         <TextField
           required
           label="Left"
@@ -69,7 +84,7 @@ export default function NonterminalRuleRow({
           onBlur={handleBlurLeft}
         />
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={4}>
         <TextField
           required
           label="Right"
@@ -78,19 +93,6 @@ export default function NonterminalRuleRow({
           onChange={handleChangeRight}
           onBlur={handleBlurRight}
         />
-      </Grid>
-      <Grid
-        item
-        xs={1}
-        sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          alignItems: 'center',
-        }}
-      >
-        <IconButton aria-label="delete">
-          <Remove />
-        </IconButton>
       </Grid>
     </>
   )

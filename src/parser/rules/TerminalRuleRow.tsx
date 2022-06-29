@@ -7,6 +7,7 @@ type TerminalRuleRowProps = {
   terminal: string
   onChangeHead: (terminal: string) => void
   onChangeTerminal: (terminal: string) => void
+  onRemove: () => void
 }
 
 /**
@@ -19,6 +20,7 @@ export default function TerminalRuleRow({
   terminal,
   onChangeHead,
   onChangeTerminal,
+  onRemove,
 }: TerminalRuleRowProps): React.ReactElement {
   const [headValue, setHeadValue] = useState(() => head)
   const [terminalValue, setTerminalValue] = useState(() => terminal)
@@ -32,6 +34,19 @@ export default function TerminalRuleRow({
 
   return (
     <>
+      <Grid
+        item
+        xs={1}
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <IconButton aria-label="delete" onClick={onRemove}>
+          <Remove />
+        </IconButton>
+      </Grid>
       <Grid item xs={4}>
         <TextField
           required
@@ -53,7 +68,7 @@ export default function TerminalRuleRow({
       >
         <ArrowRightAlt color="action" />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={8}>
         <TextField
           required
           label="Terminal"
@@ -62,19 +77,6 @@ export default function TerminalRuleRow({
           onChange={handleChangeTerminal}
           onBlur={handleBlurTerminal}
         />
-      </Grid>
-      <Grid
-        item
-        xs={1}
-        sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          alignItems: 'center',
-        }}
-      >
-        <IconButton aria-label="delete">
-          <Remove />
-        </IconButton>
       </Grid>
     </>
   )

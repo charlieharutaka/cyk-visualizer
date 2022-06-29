@@ -21,6 +21,7 @@ specifiers:
   react-dom: ^18.2.0
   typescript: ^4.7.4
   vite: ^2.9.9
+  zustand: 4.0.0-rc.1
 
 dependencies:
   '@babel/core': 7.18.5
@@ -31,6 +32,7 @@ dependencies:
   '@mui/system': 5.8.5_2n63gx4a5hafw7crejwh35wbou
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  zustand: 4.0.0-rc.1_react@18.2.0
 
 devDependencies:
   '@types/react': 18.0.14
@@ -2598,6 +2600,14 @@ packages:
       punycode: 2.1.1
     dev: true
 
+  /use-sync-external-store/1.1.0_react@18.2.0:
+    resolution: {integrity: sha512-SEnieB2FPKEVne66NpXPd1Np4R1lTNKfjuy3XdIoPQKYBAFdzbzSZlSn1KJZUiihQLQC5Znot4SBz1EOTBwQAQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /v8-compile-cache/2.3.0:
     resolution: {integrity: sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==}
     dev: true
@@ -2660,4 +2670,20 @@ packages:
   /yaml/1.10.2:
     resolution: {integrity: sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==}
     engines: {node: '>= 6'}
+    dev: false
+
+  /zustand/4.0.0-rc.1_react@18.2.0:
+    resolution: {integrity: sha512-qgcs7zLqBdHu0PuT3GW4WCIY5SgXdsv30GQMu9Qpp1BA2aS+sNS8l4x0hWuyEhjXkN+701aGWawhKDv6oWJAcw==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      immer: '>=9.0'
+      react: '>=16.8'
+    peerDependenciesMeta:
+      immer:
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      use-sync-external-store: 1.1.0_react@18.2.0
     dev: false

@@ -1,60 +1,31 @@
-import { Grid } from '@mui/material'
+import { Button, ButtonGroup, Grid, Paper } from '@mui/material'
 import React from 'react'
 
-import { Rule } from '../../cyk/cyk'
+import useParserStore from '../state/ParserStore'
 
-import NonterminalRuleRow from './NonterminalRuleRow'
-import TerminalRuleRow from './TerminalRuleRow'
-
-type RulesListProps = {
-  rules: Rule[]
-  onAddRule: (index: number, rule: Rule) => void
-  onEditRule: (index: number, rule: Rule) => void
-  onMoveRule: (startIndex: number, targetIndex: number) => void
-  onRemoveRule: (index: number) => void
-}
-
-type HandleChangeType = 'head' | 'terminal' | 'left' | 'right'
+import RuleRow from './RuleRow'
 
 /**
  * The grid container of rule rows
- * @param {RulesProps} props
  * @return {React.ReactElement}
  */
-export default function RulesList({
-  rules,
-  onAddRule,
-  onEditRule,
-  onMoveRule,
-  onRemoveRule,
-}: RulesListProps): React.ReactElement {
-  const handleEdit = (index: number, rule: Rule, type: HandleChangeType) => (value: string) => (
-    rule.splice(type === 'head' ? 0 : type === 'terminal' || type === 'left' ? 1 : 2, 1, value), onEditRule(index, rule)
-  )
+export default function RulesList(): React.ReactElement {
+  const rules = useParserStore(state => state.rules)
 
   return (
-    <Grid container spacing={2}>
-      {rules.map((rule, index) =>
-        rule.length === 2 ? (
-          <TerminalRuleRow
-            key={rule.join('-')}
-            head={rule[0]}
-            terminal={rule[1]}
-            onChangeHead={handleEdit(index, rule, 'head')}
-            onChangeTerminal={handleEdit(index, rule, 'terminal')}
-          />
-        ) : (
-          <NonterminalRuleRow
-            key={rule.join('-')}
-            head={rule[0]}
-            left={rule[1]}
-            right={rule[2]}
-            onChangeHead={handleEdit(index, rule, 'head')}
-            onChangeLeft={handleEdit(index, rule, 'left')}
-            onChangeRight={handleEdit(index, rule, 'right')}
-          />
-        ),
-      )}
-    </Grid>
+    <Paper variant="outlined">
+      <Grid container spacing={2} padding={2} columns={14} justifyContent="space-between">
+        {rules.map((rule, index) => (
+          <RuleRow key={rule.join('-')} index={index} />
+        ))}
+        <Grid item />
+        <Grid item>
+          <ButtonGroup variant="outlined">
+            <Button>Add Terminal Rule</Button>
+            <Button>Add Non-Terminal Rule</Button>
+          </ButtonGroup>
+        </Grid>
+      </Grid>
+    </Paper>
   )
 }
