@@ -1,6 +1,9 @@
-import { ArrowRightAlt, Remove } from '@mui/icons-material'
-import { Grid, IconButton, TextField } from '@mui/material'
-import React, { useState } from 'react'
+import ArrowRightAlt from '@mui/icons-material/ArrowRightAlt'
+import Remove from '@mui/icons-material/Remove'
+import Grid from '@mui/material/Grid'
+import IconButton from '@mui/material/IconButton'
+import TextField from '@mui/material/TextField'
+import React from 'react'
 
 type NonterminalRuleRowProps = {
   head: string
@@ -26,73 +29,65 @@ export default function NonterminalRuleRow({
   onChangeRight,
   onRemove,
 }: NonterminalRuleRowProps): React.ReactElement {
-  const [headValue, setHeadValue] = useState(() => head)
-  const [leftValue, setLeftValue] = useState(() => left)
-  const [rightValue, setRightValue] = useState(() => right)
-
-  const handleChangeHead = (event: React.ChangeEvent<HTMLInputElement>): void => setHeadValue(event.target.value)
-  const handleChangeLeft = (event: React.ChangeEvent<HTMLInputElement>): void => setLeftValue(event.target.value)
-  const handleChangeRight = (event: React.ChangeEvent<HTMLInputElement>): void => setRightValue(event.target.value)
-
-  const handleBlurHead = (): void => onChangeHead(headValue)
-  const handleBlurLeft = (): void => onChangeLeft(leftValue)
-  const handleBlurRight = (): void => onChangeRight(rightValue)
+  const handleChangeHead = (event: React.ChangeEvent<HTMLInputElement>): void => onChangeHead(event.target.value)
+  const handleChangeLeft = (event: React.ChangeEvent<HTMLInputElement>): void => onChangeLeft(event.target.value)
+  const handleChangeRight = (event: React.ChangeEvent<HTMLInputElement>): void => onChangeRight(event.target.value)
 
   return (
     <>
-      <Grid
-        item
-        xs={1}
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <IconButton aria-label="delete" onClick={onRemove}>
-          <Remove />
-        </IconButton>
-      </Grid>
       <Grid item xs={4}>
         <TextField
-          required
-          label="Head"
           fullWidth
-          value={headValue}
+          label="Head"
           onChange={handleChangeHead}
-          onBlur={handleBlurHead}
+          required
+          size="small"
+          value={head}
         />
       </Grid>
       <Grid
         item
-        xs={1}
         sx={{
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
         }}
+        xs={1}
       >
         <ArrowRightAlt color="action" />
       </Grid>
       <Grid item xs={4}>
         <TextField
-          required
-          label="Left"
           fullWidth
-          value={leftValue}
+          label="Left"
           onChange={handleChangeLeft}
-          onBlur={handleBlurLeft}
+          required
+          size="small"
+          value={left}
         />
       </Grid>
       <Grid item xs={4}>
         <TextField
-          required
-          label="Right"
           fullWidth
-          value={rightValue}
+          label="Right"
           onChange={handleChangeRight}
-          onBlur={handleBlurRight}
+          required
+          size="small"
+          value={right}
         />
+      </Grid>
+      <Grid
+        item
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        xs={1}
+      >
+        <IconButton aria-label="delete" onClick={onRemove}>
+          <Remove />
+        </IconButton>
       </Grid>
     </>
   )

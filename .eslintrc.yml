@@ -35,6 +35,10 @@ rules:
         - object
         - type
       newlines-between: always
+      alphabetize:
+        order: asc
+  react/jsx-sort-props:
+    - error
 settings:
   import/resolver:
     node:

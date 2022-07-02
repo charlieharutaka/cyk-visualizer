@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useCallback } from 'react'
+import shallow from 'zustand/shallow'
 
-import useParserStore from '../state/ParserStore'
+import useParserStore, { selectEditRule, selectRemoveRule } from '../state/ParserStore'
 
 import NonterminalRuleRow from './NonterminalRuleRow'
 import TerminalRuleRow from './TerminalRuleRow'
@@ -15,9 +16,13 @@ type RuleRowProps = {
  * @return {React.ReactElement}
  */
 export default function RuleRow({ index }: RuleRowProps): React.ReactElement {
-  const rule = useParserStore(state => state.rules[index])
-  const editRule = useParserStore(state => state.editRule)
-  const removeRule = useParserStore(state => state.removeRule)
+  const rule = useParserStore(
+    useCallback(state => state.rules[index], [index]),
+    shallow,
+  )
+  const editRule = useParserStore(selectEditRule)
+  const removeRule = useParserStore(selectRemoveRule)
+
   const handleEdit = (type: 'head' | 'terminal' | 'left' | 'right') => (value: string) => {
     if (rule.length === 2) {
       switch (type) {
@@ -53,20 +58,20 @@ export default function RuleRow({ index }: RuleRowProps): React.ReactElement {
     rule.length === 2 ? (
       <TerminalRuleRow
         head={rule[0]}
-        terminal={rule[1]}
         onChangeHead={handleEdit('head')}
         onChangeTerminal={handleEdit('terminal')}
         onRemove={handleRemove}
+        terminal={rule[1]}
       />
     ) : (
       <NonterminalRuleRow
         head={rule[0]}
         left={rule[1]}
-        right={rule[2]}
         onChangeHead={handleEdit('head')}
         onChangeLeft={handleEdit('left')}
         onChangeRight={handleEdit('right')}
         onRemove={handleRemove}
+        right={rule[2]}
       />
     )
   ) : (

@@ -2,8 +2,8 @@ import { ThemeProvider } from '@mui/material/styles'
 import React from 'react'
 
 import Header from './Header'
-import Parser from './parser/Parser'
 import Theme from './Theme'
+import Parser from './parser/Parser'
 
 /**
  * The main app element

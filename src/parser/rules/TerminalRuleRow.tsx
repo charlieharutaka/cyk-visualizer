@@ -1,6 +1,9 @@
-import { Grid, IconButton, TextField } from '@mui/material'
-import { Remove, ArrowRightAlt } from '@mui/icons-material'
-import React, { useState } from 'react'
+import ArrowRightAlt from '@mui/icons-material/ArrowRightAlt'
+import Remove from '@mui/icons-material/Remove'
+import Grid from '@mui/material/Grid'
+import IconButton from '@mui/material/IconButton'
+import TextField from '@mui/material/TextField'
+import React from 'react'
 
 type TerminalRuleRowProps = {
   head: string
@@ -22,61 +25,41 @@ export default function TerminalRuleRow({
   onChangeTerminal,
   onRemove,
 }: TerminalRuleRowProps): React.ReactElement {
-  const [headValue, setHeadValue] = useState(() => head)
-  const [terminalValue, setTerminalValue] = useState(() => terminal)
-
-  const handleChangeHead = (event: React.ChangeEvent<HTMLInputElement>): void => setHeadValue(event.target.value)
+  const handleChangeHead = (event: React.ChangeEvent<HTMLInputElement>): void => onChangeHead(event.target.value)
   const handleChangeTerminal = (event: React.ChangeEvent<HTMLInputElement>): void =>
-    setTerminalValue(event.target.value)
-
-  const handleBlurHead = (): void => onChangeHead(headValue)
-  const handleBlurTerminal = (): void => onChangeTerminal(terminalValue)
+    onChangeTerminal(event.target.value)
 
   return (
     <>
-      <Grid
-        item
-        xs={1}
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <IconButton aria-label="delete" onClick={onRemove}>
-          <Remove />
-        </IconButton>
-      </Grid>
       <Grid item xs={4}>
-        <TextField
-          required
-          label="Head"
-          fullWidth
-          value={headValue}
-          onChange={handleChangeHead}
-          onBlur={handleBlurHead}
-        />
+        <TextField fullWidth label="Head" onChange={handleChangeHead} required size="small" value={head} />
       </Grid>
       <Grid
         item
-        xs={1}
         sx={{
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
         }}
+        xs={1}
       >
         <ArrowRightAlt color="action" />
       </Grid>
       <Grid item xs={8}>
-        <TextField
-          required
-          label="Terminal"
-          fullWidth
-          value={terminalValue}
-          onChange={handleChangeTerminal}
-          onBlur={handleBlurTerminal}
-        />
+        <TextField fullWidth label="Terminal" onChange={handleChangeTerminal} required size="small" value={terminal} />
+      </Grid>
+      <Grid
+        item
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        xs={1}
+      >
+        <IconButton aria-label="delete" onClick={onRemove}>
+          <Remove />
+        </IconButton>
       </Grid>
     </>
   )

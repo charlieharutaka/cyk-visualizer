@@ -1,4 +1,5 @@
-import { Box, Typography } from '@mui/material'
+import Box from '@mui/material/Box' 
+import Typography from '@mui/material/Typography'
 import React from 'react'
 
 import bg from './images/pawel-czerwinski-Hu6kULsI5dM-unsplash.jpg'

@@ -1,6 +1,8 @@
-import { Box, Button, Container, Typography } from '@mui/material'
+import Box from '@mui/material/Box'
+import Container from '@mui/material/Container'
 import React from 'react'
 
+import InputSection from './input/InputSection'
 import RulesList from './rules/RulesList'
 
 /**
@@ -11,11 +13,8 @@ export default function Parser(): React.ReactElement {
   return (
     <Box my={4}>
       <Container maxWidth="md">
-        <Typography variant="h3" fontWeight="medium">
-          Rules
-        </Typography>
         <RulesList />
-        <Button variant="outlined">Validate</Button>
+        <InputSection />
       </Container>
     </Box>
   )
