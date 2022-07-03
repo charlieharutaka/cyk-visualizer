@@ -19,7 +19,7 @@ export default function InputSection(): React.ReactElement {
     <Paper variant="outlined">
       <Box padding={2}>
         <Box paddingX={2} paddingY={1}>
-          <Typography fontWeight="medium" variant="h5">
+          <Typography fontWeight="medium" variant="h4">
             Input Tokens
           </Typography>
           <Typography fontWeight="light">{tokens.length} tokens</Typography>

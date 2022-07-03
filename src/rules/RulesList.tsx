@@ -25,7 +25,7 @@ export default function RulesList(): React.ReactElement {
     <Paper variant="outlined">
       <Box padding={2}>
         <Box paddingX={2} paddingY={1}>
-          <Typography fontWeight="medium" variant="h5">
+          <Typography fontWeight="medium" variant="h4">
             Production Rules
           </Typography>
           <Typography fontWeight="light">{rules.length} defined</Typography>
