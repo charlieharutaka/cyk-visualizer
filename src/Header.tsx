@@ -1,8 +1,8 @@
-import Box from '@mui/material/Box' 
+import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import React from 'react'
 
-import bg from './images/pawel-czerwinski-Hu6kULsI5dM-unsplash.jpg'
+import bg from './assets/pawel-czerwinski-Hu6kULsI5dM-unsplash.jpg'
 
 /**
  * The header element
@@ -17,6 +17,7 @@ export default function Header(): React.ReactElement {
         display: 'flex',
         justifyContent: 'flex-start',
         alignItems: 'center',
+        borderRadius: '16px',
       }}
     >
       <Typography

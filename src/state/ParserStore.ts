@@ -1,7 +1,7 @@
 import create from 'zustand'
 
-import { Rule } from '../../cyk/cyk'
-import { exampleGrammar, exampleSentence } from '../../cyk/example'
+import { Rule } from '../cyk/cyk'
+import { exampleGrammar, exampleSentence } from '../cyk/example'
 
 export type ParserStore = {
   rules: Rule[]
@@ -89,13 +89,27 @@ export function selectRemoveToken(state: ParserStore): (index: number) => void {
 export default create<ParserStore>(set => ({
   rules: [...exampleGrammar],
   tokens: [...exampleSentence],
-  addRule: (index, rule): void => set(state => ({ rules: (state.rules.splice(index, 0, rule), state.rules) })),
-  editRule: (index, rule): void => set(state => ({ rules: (state.rules.splice(index, 1, rule), state.rules) })),
-  moveRule: (startIndex, targetIndex): void =>
+  addRule: (index, rule): void =>
     set(state => ({
-      rules: (state.rules.splice(targetIndex, 1, state.rules[startIndex]), state.rules),
+      rules:
+        index === state.rules.length
+          ? [...state.rules, rule]
+          : [...state.rules.slice(0, index), rule, ...state.rules.slice(index)],
     })),
-  removeRule: (index): void => set(state => ({ rules: (state.rules.splice(index, 1), state.rules) })),
+  editRule: (index, rule): void =>
+    set(state => ({
+      rules: [...state.rules.slice(0, index), rule, ...state.rules.slice(index + 1)],
+    })),
+  moveRule: (startIndex, targetIndex): void =>
+    set(
+      state => (
+        state.rules.splice(targetIndex, 1, state.rules.splice(startIndex, 1)[0]),
+        {
+          rules: [...state.rules],
+        }
+      ),
+    ),
+  removeRule: (index): void => set(state => ({ rules: state.rules.filter((_, i) => i !== index) })),
   addToken: (token): void => set(state => ({ tokens: [...state.tokens, token] })),
-  removeToken: (index): void => set(state => ({ tokens: state.tokens.filter((token, i) => i !== index) })),
+  removeToken: (index): void => set(state => ({ tokens: state.tokens.filter((_, i) => i !== index) })),
 }))

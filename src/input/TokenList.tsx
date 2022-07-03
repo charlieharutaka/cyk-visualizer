@@ -19,6 +19,8 @@ export default function TokensList(): React.ReactElement {
   const addToken = useParserStore(selectAddToken)
   const removeToken = useParserStore(selectRemoveToken)
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>): void =>
+    void (event.key === 'Enter' && (event.preventDefault(), handleAddToken()))
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => setAddValue(event.target.value)
 
   const handleAddToken = (): void => void (addValue !== '' && (addToken(addValue), setAddValue('')))
@@ -26,17 +28,31 @@ export default function TokensList(): React.ReactElement {
 
   return (
     <Box>
-      <Grid container padding={1} spacing={2}>
+      <Grid container paddingY={1} spacing={2}>
         {tokens.map((token, index) => (
           <Grid item key={index}>
             <Chip label={token} onDelete={handleRemoveToken(index)} variant="outlined" />
           </Grid>
         ))}
       </Grid>
-      <Stack direction="row" padding={1} spacing={2}>
-        <TextField fullWidth onChange={handleChange} placeholder="Add terminal" size="small" value={addValue} />
-        <Button disabled={addValue === ''} onClick={handleAddToken} variant="outlined">
-          Add
+      <Stack direction="row" paddingY={1} spacing={2}>
+        <TextField
+          fullWidth
+          label="Add terminal"
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          size="small"
+          value={addValue}
+        />
+        <Button
+          disabled={addValue === ''}
+          onClick={handleAddToken}
+          sx={{
+            whiteSpace: 'nowrap',
+          }}
+          variant="outlined"
+        >
+          Add Token
         </Button>
       </Stack>
     </Box>

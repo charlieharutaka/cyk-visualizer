@@ -1,11 +1,8 @@
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import Accordion from '@mui/material/Accordion'
-import AccordionDetails from '@mui/material/AccordionDetails'
-import AccordionSummary from '@mui/material/AccordionSummary'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import ButtonGroup from '@mui/material/ButtonGroup'
 import Grid from '@mui/material/Grid'
+import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import React from 'react'
 
@@ -25,24 +22,21 @@ export default function RulesList(): React.ReactElement {
     addRule(rules.length, type === 'terminal' ? ['', ''] : ['', '', ''])
 
   return (
-    <Accordion defaultExpanded variant="outlined">
-      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-        <Box paddingX={1}>
+    <Paper variant="outlined">
+      <Box padding={2}>
+        <Box paddingX={2} paddingY={1}>
           <Typography fontWeight="medium" variant="h5">
             Production Rules
           </Typography>
           <Typography fontWeight="light">{rules.length} defined</Typography>
         </Box>
-      </AccordionSummary>
-      <AccordionDetails>
-        <Box paddingX={1}>
+        <Box paddingX={2} paddingY={1}>
           <Typography>
             Productions used by the CYK parser must be in{' '}
             <a href="https://en.wikipedia.org/wiki/Chomsky_normal_form">Chomsky Normal Form (CNF)</a>.
           </Typography>
         </Box>
-        <Box paddingY={2} />
-        <Grid columns={14} container justifyContent="space-between" padding={1} spacing={2}>
+        <Grid columns={14} container justifyContent="space-between" paddingX={2} paddingY={1} spacing={2}>
           {rules.map((_, index) => (
             <RuleRow index={index} key={index} />
           ))}
@@ -53,7 +47,7 @@ export default function RulesList(): React.ReactElement {
             </ButtonGroup>
           </Grid>
         </Grid>
-      </AccordionDetails>
-    </Accordion>
+      </Box>
+    </Paper>
   )
 }

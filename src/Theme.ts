@@ -13,4 +13,13 @@ export default createTheme({
     fontWeightMedium: 600,
     fontWeightBold: 900,
   },
+  components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderRadius: '16px',
+        },
+      },
+    },
+  },
 })
