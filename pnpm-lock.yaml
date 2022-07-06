@@ -17,6 +17,7 @@ specifiers:
   eslint-config-prettier: ^8.5.0
   eslint-plugin-import: ^2.26.0
   eslint-plugin-react: ^7.30.1
+  immer: ^9.0.15
   react: ^18.2.0
   react-dom: ^18.2.0
   typescript: ^4.7.4
@@ -30,9 +31,10 @@ dependencies:
   '@mui/icons-material': 5.8.4_cvyp5zempd5ykaci6zzt36rera
   '@mui/material': 5.8.5_h2u6a3oivtyocvjxeke7xcvlfa
   '@mui/system': 5.8.5_2n63gx4a5hafw7crejwh35wbou
+  immer: 9.0.15
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
-  zustand: 4.0.0-rc.1_react@18.2.0
+  zustand: 4.0.0-rc.1_immer@9.0.15+react@18.2.0
 
 devDependencies:
   '@types/react': 18.0.14
@@ -1857,6 +1859,10 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
+  /immer/9.0.15:
+    resolution: {integrity: sha512-2eB/sswms9AEUSkOm4SbV5Y7Vmt/bKRwByd52jfLkW4OLYeaTP3EEiJ9agqU0O/tq6Dk62Zfj+TJSqfm1rLVGQ==}
+    dev: false
+
   /import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
@@ -2672,7 +2678,7 @@ packages:
     engines: {node: '>= 6'}
     dev: false
 
-  /zustand/4.0.0-rc.1_react@18.2.0:
+  /zustand/4.0.0-rc.1_immer@9.0.15+react@18.2.0:
     resolution: {integrity: sha512-qgcs7zLqBdHu0PuT3GW4WCIY5SgXdsv30GQMu9Qpp1BA2aS+sNS8l4x0hWuyEhjXkN+701aGWawhKDv6oWJAcw==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
@@ -2684,6 +2690,7 @@ packages:
       react:
         optional: true
     dependencies:
+      immer: 9.0.15
       react: 18.2.0
       use-sync-external-store: 1.1.0_react@18.2.0
     dev: false

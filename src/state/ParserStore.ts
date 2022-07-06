@@ -1,3 +1,4 @@
+import produce from 'immer'
 import create from 'zustand'
 
 import cyk, { ParseNode, Rule } from '../cyk/cyk'
@@ -121,28 +122,57 @@ export default create<ParserStore>(set => ({
   tokens: [...exampleSentence],
   parseMatrix: undefined,
   addRule: (index, rule): void =>
-    set(state => ({
-      rules:
-        index === state.rules.length
-          ? [...state.rules, rule]
-          : [...state.rules.slice(0, index), rule, ...state.rules.slice(index)],
-    })),
+    set(
+      produce((state: ParserStore) => {
+        state.rules.splice(index, 0, rule)
+        state.parseMatrix = undefined
+      }),
+    ),
   editRule: (index, rule): void =>
-    set(state => ({
-      rules: [...state.rules.slice(0, index), rule, ...state.rules.slice(index + 1)],
-    })),
+    set(
+      produce((state: ParserStore) => {
+        state.rules.splice(index, 1, rule)
+        state.parseMatrix = undefined
+      }),
+    ),
   moveRule: (startIndex, targetIndex): void =>
     set(
-      state => (
-        state.rules.splice(targetIndex, 1, state.rules.splice(startIndex, 1)[0]),
-        {
-          rules: [...state.rules],
-        }
-      ),
+      produce((state: ParserStore) => {
+        state.rules.splice(targetIndex, 1, state.rules.splice(startIndex, 1)[0])
+        state.parseMatrix = undefined
+      }),
     ),
-  removeRule: (index): void => set(state => ({ rules: state.rules.filter((_, i) => i !== index) })),
-  addToken: (token): void => set(state => ({ tokens: [...state.tokens, token] })),
-  removeToken: (index): void => set(state => ({ tokens: state.tokens.filter((_, i) => i !== index) })),
-  resetParseMatrix: (): void => set(state => ({ parseMatrix: undefined })),
-  parse: (): void => set(state => ({ parseMatrix: cyk(state.rules, state.tokens) })),
+  removeRule: (index): void =>
+    set(
+      produce((state: ParserStore) => {
+        state.rules.splice(index, 1)
+        state.parseMatrix = undefined
+      }),
+    ),
+  addToken: (token): void =>
+    set(
+      produce((state: ParserStore) => {
+        state.tokens.push(token)
+        state.parseMatrix = undefined
+      }),
+    ),
+  removeToken: (index): void =>
+    set(
+      produce((state: ParserStore) => {
+        state.tokens.splice(index, 1)
+        state.parseMatrix = undefined
+      }),
+    ),
+  resetParseMatrix: (): void =>
+    set(
+      produce((state: ParserStore) => {
+        state.parseMatrix = undefined
+      }),
+    ),
+  parse: (): void =>
+    set(
+      produce((state: ParserStore) => {
+        state.parseMatrix = cyk(state.rules, state.tokens)
+      }),
+    ),
 }))

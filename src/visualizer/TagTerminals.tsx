@@ -1,9 +1,9 @@
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Chip from '@mui/material/Chip'
-import Grid from '@mui/material/Grid'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
+import Zoom from '@mui/material/Zoom'
 import React, { useEffect } from 'react'
 
 import useParserStore, {
@@ -39,16 +39,26 @@ export default function TagTerminals(): React.ReactElement {
       </Stack>
       <Typography>Tag tokens with terminal rules</Typography>
       <Box paddingY={2}>
-        <Stack spacing={2}>
-          {tokens.map((token, index) => (
-            <Stack direction="row" key={index} spacing={2}>
-              <Chip label={token} variant="outlined" />
-              {parseMatrix &&
-                [...(parseMatrix[0][index]?.keys() ?? [])].map(tag => (
-                  <Chip color="primary" key={tag} label={tag} variant="outlined" />
-                ))}
-            </Stack>
-          ))}
+        <Stack direction="row" spacing={2}>
+          <Stack spacing={2}>
+            {tokens.map((token, index) => (
+              <Stack direction="row" key={index} spacing={2}>
+                <Chip label={token} variant="outlined" />
+              </Stack>
+            ))}
+          </Stack>
+          <Stack spacing={2}>
+            {tokens.map((_, index) => (
+              <Stack direction="row" key={index} spacing={2}>
+                {parseMatrix &&
+                  [...(parseMatrix[0]?.[index]?.keys() ?? [])].map(tag => (
+                    <Zoom in key={tag} style={{ transitionDelay: `${index * 50}ms` }}>
+                      <Chip color="primary" label={tag} variant="outlined" />
+                    </Zoom>
+                  ))}
+              </Stack>
+            ))}
+          </Stack>
         </Stack>
       </Box>
     </Box>
