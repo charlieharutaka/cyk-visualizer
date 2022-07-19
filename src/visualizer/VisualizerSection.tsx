@@ -3,7 +3,8 @@ import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import React from 'react'
 
-import TagTerminals from './TagTerminals'
+// import TagTerminals from './TagTerminals'
+import TreeGraph from './TreeGraph'
 
 /**
  * The visualizer section
@@ -18,7 +19,8 @@ export default function VisualizerSection(): React.ReactElement {
             Parse Visualizer
           </Typography>
         </Box>
-        <TagTerminals />
+        {/* <TagTerminals /> */}
+        <TreeGraph />
       </Box>
     </Paper>
   )

@@ -5,6 +5,9 @@ export default createTheme({
     primary: {
       main: '#d44764',
     },
+    secondary: {
+      main: '#54c3e9',
+    },
   },
   typography: {
     fontFamily: "'Overpass', sans-serif",

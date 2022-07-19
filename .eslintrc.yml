@@ -17,6 +17,10 @@ plugins:
   - import
   - '@typescript-eslint'
 rules:
+  sort-keys:
+    - error
+  sort-vars:
+    - error
   '@typescript-eslint/explicit-function-return-type':
     - error
   import/first:
@@ -39,6 +43,8 @@ rules:
         order: asc
   react/jsx-sort-props:
     - error
+  import/named:
+    - off
 settings:
   import/resolver:
     node:
